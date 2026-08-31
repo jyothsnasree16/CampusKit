@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CampusKit 🎓</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5f7ff;
+    color: #1f2937;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    opacity: 0.8;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    text-align: center;
+    padding: 65px 20px 90px;
+    border-radius: 0 0 45px 45px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 28px;
+}
+
+.start-btn {
+    display: inline-block;
+    background: white;
+    color: #4f46e5;
+    padding: 13px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+/* ================= MAIN ================= */
+
+.container {
+    width: 86%;
+    max-width: 1200px;
+    margin: -45px auto 50px;
+}
+
+
+/* ================= FEATURE CARDS ================= */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    background: rgba(255,255,255,0.95);
+    padding: 27px 20px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.09);
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(79,70,229,0.18);
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.feature-card h2 {
+    font-size: 21px;
+    margin-bottom: 9px;
+}
+
+.feature-card p {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 45px;
+}
+
+.open-btn {
+    display: inline-block;
+    margin-top: 17px;
+    padding: 9px 21px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.open-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(79,70,229,0.3);
+}
+
+
+/* ================= SECTION ================= */
+
+.section-title {
+    font-size: 25px;
+    margin: 42px 0 17px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+}
+
+
+/* ================= TODAY + DEADLINES ================= */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 22px;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+
+/* ================= SCHEDULE ================= */
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 15px;
+    background: #f5f3ff;
+    border-radius: 15px;
+    margin-bottom: 12px;
+}
+
+.time {
+    width: 80px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+.subject {
+    font-weight: 650;
+    font-size: 16px;
+}
+
+.room {
+    color: #6b7280;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+
+/* ================= DEADLINES ================= */
+
+.deadline {
+    background: #faf5ff;
+    border-left: 5px solid #7c3aed;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 13px;
+}
+
+.deadline h4 {
+    margin-bottom: 5px;
+}
+
+.deadline p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.date {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+
+/* ================= CGPA ================= */
+
+.cgpa-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.cgpa-circle {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(79,70,229,0.25);
+}
+
+.cgpa-circle strong {
+    font-size: 38px;
+}
+
+.cgpa-circle span {
+    font-size: 13px;
+}
+
+.cgpa-text {
+    flex: 1;
+}
+
+.cgpa-text h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.cgpa-text p {
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+
+/* ================= ATTENDANCE ================= */
+
+.progress-box {
+    margin-bottom: 20px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.progress-info span {
+    font-weight: 600;
+}
+
+.progress-info strong {
+    color: #4f46e5;
+}
+
+.progress {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+    border-radius: 20px;
+}
+
+
+/* ================= ASSIGNMENTS ================= */
+
+.assignment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px;
+    background: #f8f7ff;
+    border-radius: 14px;
+    margin-bottom: 12px;
+}
+
+.assignment h4 {
+    margin-bottom: 5px;
+}
+
+.assignment p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.pending {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.done {
+    background: #ecfdf5;
+    color: #059669;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* ================= TIMETABLE ================= */
+
+.timetable {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+td:first-child {
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+tr:hover td {
+    background: #f8f7ff;
+}
+
+
+/* ================= IDEAS ================= */
+
+.ideas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.idea {
+    padding: 22px;
+    background: linear-gradient(135deg, #eef2ff, #faf5ff);
+    border-radius: 18px;
+}
+
+.idea-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.idea h3 {
+    margin-bottom: 7px;
+}
+
+.idea p {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* ================= TODAY OVERVIEW ================= */
+
+.overview {
+    margin-top: 35px;
+    background: linear-gradient(135deg, #eef2ff, #faf5ff);
+    padding: 28px;
+    border-radius: 25px;
+}
+
+.overview h2 {
+    margin-bottom: 17px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.overview-item {
+    background: white;
+    padding: 20px;
+    border-radius: 17px;
+    text-align: center;
+}
+
+.overview-item strong {
+    display: block;
+    color: #4f46e5;
+    font-size: 27px;
+    margin-bottom: 5px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width: 900px) {
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .ideas {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .overview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .navbar a {
+        display: none;
+    }
+
+    .cgpa-box {
+        flex-direction: column;
+        text-align: center;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🎓 CampusKit
+    </div>
+
+    <div>
+        <a href="#">Home</a>
+        <a href="#notes">Notes</a>
+        <a href="#assignments">Tasks</a>
+        <a href="#timetable">Timetable</a>
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <h1>Welcome to CampusKit 🎓</h1>
+
+    <p>
+        Your smart and simple student toolkit
+    </p>
+
+    <a href="#features" class="start-btn">
+        Get Started →
+    </a>
+
+</section>
+
+
+<main class="container">
+
+
+<!-- ================= FEATURES ================= -->
+
+<div class="features" id="features">
+
+
+    <div class="feature-card" id="notes">
+
+        <div class="icon">📚</div>
+
+        <h2>Study Notes</h2>
+
+        <p>
+            Keep your important study materials organized in one place.
+        </p>
+
+        <a href="#notes-section" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="icon">📊</div>
+
+        <h2>CGPA Tracker</h2>
+
+        <p>
+            Track your semester performance and overall academic progress.
+        </p>
+
+        <a href="#cgpa" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="icon">📅</div>
+
+        <h2>Attendance</h2>
+
+        <p>
+            Keep track of your attendance subject by subject.
+        </p>
+
+        <a href="#attendance" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card" id="assignments">
+
+        <div class="icon">📝</div>
+
+        <h2>Assignments</h2>
+
+        <p>
+            Manage assignments, projects and upcoming deadlines.
+        </p>
+
+        <a href="#assignment-section" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="icon">🕐</div>
+
+        <h2>Today's Schedule</h2>
+
+        <p>
+            See your classes and activities planned for today.
+        </p>
+
+        <a href="#schedule" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="icon">⏰</div>
+
+        <h2>Upcoming Deadlines</h2>
+
+        <p>
+            Stay ahead of assignments, projects and important dates.
+        </p>
+
+        <a href="#deadlines" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="icon">📋</div>
+
+        <h2>Timetable</h2>
+
+        <p>
+            View your weekly timetable and plan your college day.
+        </p>
+
+        <a href="#timetable" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="icon">💡</div>
+
+        <h2>Ideas</h2>
+
+        <p>
+            Save your project ideas and turn them into something amazing.
+        </p>
+
+        <a href="#ideas" class="open-btn">
+            Open →
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TODAY + DEADLINES ================= -->
+
+<div class="dashboard">
+
+
+    <!-- TODAY'S SCHEDULE -->
+
+    <div class="card" id="schedule">
+
+        <h2>🕐 Today's Schedule</h2>
+
+        <div class="schedule-item">
+
+            <div class="time">9:00 AM</div>
+
+            <div>
+                <div class="subject">Java</div>
+                <div class="room">Room 204</div>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+            <div class="time">10:00 AM</div>
+
+            <div>
+                <div class="subject">Data Structures</div>
+                <div class="room">Lab 2</div>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+            <div class="time">11:30 AM</div>
+
+            <div>
+                <div class="subject">Python</div>
+                <div class="room">Room 108</div>
+            </div>
+
+        </div>
+
+
+        <div class="schedule-item">
+
+            <div class="time">2:00 PM</div>
+
+            <div>
+                <div class="subject">DMGT</div>
+                <div class="room">Room 301</div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- UPCOMING DEADLINES -->
+
+    <div class="card" id="deadlines">
+
+        <h2>⏰ Upcoming Deadlines</h2>
+
+        <div class="deadline">
+
+            <h4>Java Assignment</h4>
+
+            <p>
+                Due: <span class="date">Tomorrow</span>
+            </p>
+
+        </div>
+
+
+        <div class="deadline">
+
+            <h4>Python Mini Project</h4>
+
+            <p>
+                Due: <span class="date">Sep 3</span>
+            </p>
+
+        </div>
+
+
+        <div class="deadline">
+
+            <h4>Data Structures Record</h4>
+
+            <p>
+                Due: <span class="date">Sep 5</span>
+            </p>
+
+        </div>
+
+
+        <div class="deadline">
+
+            <h4>DMGT Assignment</h4>
+
+            <p>
+                Due: <span class="date">Sep 8</span>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CGPA ================= -->
+
+<h2 class="section-title" id="cgpa">
+    🎓 CGPA Tracker
+</h2>
+
+<div class="card">
+
+    <div class="cgpa-box">
+
+        <div class="cgpa-circle">
+
+            <strong>8.70</strong>
+
+            <span>Current CGPA</span>
+
+        </div>
+
+
+        <div class="cgpa-text">
+
+            <h3>Your Academic Progress</h3>
+
+            <p>
+                Keep track of your semester results and work towards
+                improving your overall academic performance.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ATTENDANCE ================= -->
+
+<h2 class="section-title" id="attendance">
+    📊 Attendance Overview
+</h2>
+
+<div class="card">
+
+
+    <div class="progress-box">
+
+        <div class="progress-info">
+            <span>Java</span>
+            <strong>92%</strong>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" style="width:92%"></div>
+        </div>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <div class="progress-info">
+            <span>Python</span>
+            <strong>88%</strong>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" style="width:88%"></div>
+        </div>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <div class="progress-info">
+            <span>Data Structures</span>
+            <strong>85%</strong>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" style="width:85%"></div>
+        </div>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <div class="progress-info">
+            <span>DMGT</span>
+            <strong>83%</strong>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" style="width:83%"></div>
+        </div>
+
+    </div>
+
+
+    <div class="progress-box">
+
+        <div class="progress-info">
+            <span>DLCO</span>
+            <strong>87%</strong>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" style="width:87%"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ASSIGNMENTS ================= -->
+
+<h2 class="section-title" id="assignment-section">
+    📝 Assignments
+</h2>
+
+<div class="card">
+
+
+    <div class="assignment">
+
+        <div>
+
+            <h4>Java Assignment</h4>
+
+            <p>Inheritance and Method Overloading</p>
+
+        </div>
+
+        <span class="pending">
+            Pending
+        </span>
+
+    </div>
+
+
+    <div class="assignment">
+
+        <div>
+
+            <h4>Python Assignment</h4>
+
+            <p>Functions and Modules</p>
+
+        </div>
+
+        <span class="pending">
+            Pending
+        </span>
+
+    </div>
+
+
+    <div class="assignment">
+
+        <div>
+
+            <h4>Data Structures</h4>
+
+            <p>Linked Lists and Searching</p>
+
+        </div>
+
+        <span class="done">
+            Completed
+        </span>
+
+    </div>
+
+
+    <div class="assignment">
+
+        <div>
+
+            <h4>DMGT Assignment</h4>
+
+            <p>Discrete Mathematics Problems</p>
+
+        </div>
+
+        <span class="pending">
+            Pending
+        </span>
+
+    </div>
+
+
+    <div class="assignment">
+
+        <div>
+
+            <h4>DLCO Record</h4>
+
+            <p>Digital Logic and Computer Organization</p>
+
+        </div>
+
+        <span class="done">
+            Completed
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TIMETABLE ================= -->
+
+<h2 class="section-title" id="timetable">
+    📅 Weekly Timetable
+</h2>
+
+<div class="timetable">
+
+<table>
+
+<tr>
+
+    <th>Time</th>
+
+    <th>Monday</th>
+
+    <th>Tuesday</th>
+
+    <th>Wednesday</th>
+
+    <th>Thursday</th>
+
+    <th>Friday</th>
+
+</tr>
+
+
+<tr>
+
+    <td>9:00</td>
+
+    <td>Java</td>
+
+    <td>Python</td>
+
+    <td>DMGT</td>
+
+    <td>Java</td>
+
+    <td>DLCO</td>
+
+</tr>
+
+
+<tr>
+
+    <td>10:00</td>
+
+    <td>Data Structures</td>
+
+    <td>DLCO</td>
+
+    <td>Python</td>
+
+    <td>DMGT</td>
+
+    <td>Data Structures</td>
+
+</tr>
+
+
+<tr>
+
+    <td>11:30</td>
+
+    <td>Python</td>
+
+    <td>Java</td>
+
+    <td>Data Structures</td>
+
+    <td>DLCO</td>
+
+    <td>DMGT</td>
+
+</tr>
+
+
+<tr>
+
+    <td>1:00</td>
+
+    <td colspan="5">
+        🍴 Lunch Break
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <td>2:00</td>
+
+    <td>DMGT</td>
+
+    <td>Data Structures</td>
+
+    <td>DLCO</td>
+
+    <td>Python</td>
+
+    <td>Java</td>
+
+</tr>
+
+
+</table>
+
+</div>
+
+
+<!-- ================= NOTES ================= -->
+
+<h2 class="section-title" id="notes-section">
+    📚 Study Notes
+</h2>
+
+<div class="ideas">
+
+    <div class="idea">
+
+        <div class="idea-icon">☕</div>
+
+        <h3>Java</h3>
+
+        <p>
+            Keep your Java programs, concepts and important notes organized.
+        </p>
+
+    </div>
+
+
+    <div class="idea">
+
+        <div class="idea-icon">🐍</div>
+
+        <h3>Python</h3>
+
+        <p>
+            Store Python notes, programs and useful examples here.
+        </p>
+
+    </div>
+
+
+    <div class="idea">
+
+        <div class="idea-icon">🌳</div>
+
+        <h3>Data Structures</h3>
+
+        <p>
+            Keep algorithms, linked lists, stacks, queues and trees together.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= IDEAS ================= -->
+
+<h2 class="section-title" id="ideas">
+    💡 Project Ideas
+</h2>
+
+<div class="ideas">
+
+
+    <div class="idea">
+
+        <div class="idea-icon">💡</div>
+
+        <h3>New Project</h3>
+
+        <p>
+            Save your next amazing project idea here.
+        </p>
+
+    </div>
+
+
+    <div class="idea">
+
+        <div class="idea-icon">🚀</div>
+
+        <h3>Hackathon</h3>
+
+        <p>
+            Store ideas for your upcoming hackathons and competitions.
+        </p>
+
+    </div>
+
+
+    <div class="idea">
+
+        <div class="idea-icon">🌟</div>
+
+        <h3>Future Goals</h3>
+
+        <p>
+            Keep track of things you want to learn and achieve.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TODAY'S OVERVIEW ================= -->
+
+<div class="overview">
+
+    <h2>
+        ✨ Today's Overview
+    </h2>
+
+
+    <div class="overview-grid">
+
+
+        <div class="overview-item">
+
+            <strong>4</strong>
+
+            Classes Today
+
+        </div>
+
+
+        <div class="overview-item">
+
+            <strong>2</strong>
+
+            Assignments Pending
+
+        </div>
+
+
+        <div class="overview-item">
+
+            <strong>87%</strong>
+
+            Overall Attendance
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    Made with ❤️ for students | CampusKit 🎓
+
+</footer>
+
+
+</body>
+
+</html>

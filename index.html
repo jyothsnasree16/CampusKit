@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusKit</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#4facfe,#7367f0,#9b59b6);
+    color:#fff;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+}
+
+.navbar{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.nav-home{
+    background:rgba(255,255,255,0.2);
+    color:white;
+    padding:10px 18px;
+    border-radius:20px;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+}
+
+.home{
+    text-align:center;
+    padding:65px 0 40px;
+}
+
+.home h1{
+    font-size:48px;
+    margin-bottom:12px;
+}
+
+.home h1 span{
+    color:#ffe66d;
+}
+
+.home p{
+    font-size:18px;
+    opacity:.9;
+    margin-bottom:40px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.17);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:25px;
+    padding:30px;
+    min-height:210px;
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,.24);
+}
+
+.icon{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.card h2{
+    margin-bottom:10px;
+}
+
+.card p{
+    opacity:.85;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.open-btn{
+    background:white;
+    color:#6255d9;
+    padding:11px 24px;
+    border-radius:25px;
+    font-weight:bold;
+}
+
+.screen{
+    display:none;
+    padding:40px 0 70px;
+}
+
+.screen.active{
+    display:block;
+}
+
+.screen-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.back{
+    background:rgba(255,255,255,.2);
+    color:white;
+    padding:10px 18px;
+    border-radius:20px;
+}
+
+.panel{
+    background:rgba(255,255,255,.96);
+    color:#333;
+    border-radius:25px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.panel h2{
+    color:#5b50d6;
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:15px 0 7px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+    border-color:#665be0;
+}
+
+.primary{
+    margin-top:20px;
+    padding:13px 25px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#6255d9,#4facfe);
+    color:white;
+    font-weight:bold;
+}
+
+.result{
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#f2f0ff;
+    color:#333;
+}
+
+.big-result{
+    font-size:42px;
+    font-weight:bold;
+    color:#5b50d6;
+    margin:10px 0;
+}
+
+.subject-box{
+    background:#f7f7fb;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.subject-box h3{
+    color:#5148c5;
+    margin-bottom:10px;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.status{
+    padding:15px;
+    border-radius:15px;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.safe{
+    background:#dff8e7;
+    color:#16803b;
+}
+
+.caution{
+    background:#fff3cd;
+    color:#946c00;
+}
+
+.danger{
+    background:#ffe1e1;
+    color:#c62828;
+}
+
+.list-item{
+    background:#f7f7fb;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:12px;
+    color:#333;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.list-item.completed{
+    opacity:.55;
+    text-decoration:line-through;
+}
+
+.delete-btn{
+    background:#ff6b6b;
+    color:white;
+    padding:8px 12px;
+    border-radius:9px;
+}
+
+.complete-btn{
+    background:#4caf50;
+    color:white;
+    padding:8px 12px;
+    border-radius:9px;
+}
+
+.timetable{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.timetable th,
+.timetable td{
+    border:1px solid #ddd;
+    padding:13px 8px;
+    text-align:center;
+}
+
+.timetable th{
+    background:#6255d9;
+    color:white;
+}
+
+.timetable td{
+    background:#fafaff;
+}
+
+.schedule-item{
+    padding:18px;
+    border-left:5px solid #6255d9;
+    background:#f7f7fb;
+    color:#333;
+    margin-bottom:12px;
+    border-radius:10px;
+}
+
+.empty{
+    text-align:center;
+    color:#777;
+    padding:25px;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    opacity:.85;
+}
+
+@media(max-width:750px){
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .home h1{
+        font-size:36px;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .panel{
+        padding:20px;
+    }
+
+    .timetable{
+        font-size:11px;
+    }
+
+    .timetable th,
+    .timetable td{
+        padding:8px 3px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">🎓 CampusKit</div>
+    <button class="nav-home" onclick="showHome()">Home</button>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<section id="home" class="home">
+    <h1>Welcome to <span>CampusKit</span> 🎓</h1>
+    <p>Your smart and simple student toolkit</p>
+
+    <div class="features">
+
+        <div class="card">
+            <div class="icon">🎓</div>
+            <h2>CGPA Tracker</h2>
+            <p>Enter your marks and calculate your overall CGPA.</p>
+            <button class="open-btn" onclick="window.location.href='cgpa.html'">Open →</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📊</div>
+            <h2>Attendance</h2>
+            <p>Check your attendance and know whether you are in the safe zone.</p>
+            <button class="open-btn" onclick="window.location.href='attendance.html'">Open →</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📝</div>
+            <h2>Assignments</h2>
+            <p>Keep track of your assignments and completion status.</p>
+            <button class="open-btn" onclick="window.location.href='assignments.html'">Open →</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📚</div>
+            <h2>Study Schedule</h2>
+            <p>Create a practical study plan for your day.</p>
+            <button class="open-btn" onclick="window.location.href='schedule.html'">Open →</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">⏰</div>
+            <h2>Upcoming Deadlines</h2>
+            <p>Keep exams, assignments and important dates in one place.</p>
+            <button class="open-btn" onclick="window.location.href='deadlines.html'">Open →</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📅</div>
+            <h2>Timetable</h2>
+            <p>View your weekly college timetable.</p>
+            <button class="open-btn" onclick="window.location.href='timetable.html'">Open →</button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CGPA -->
+<section id="cgpa" class="screen">
+
+    <div class="screen-header">
+        <button class="back" onclick="showHome()">← Back</button>
+        <h1>🎓 CGPA Tracker</h1>
+    </div>
+
+    <div class="panel">
+        <h2>Enter Your Marks</h2>
+        <p>These five subjects are already added for you.</p>
+
+        <div id="cgpaSubjects"></div>
+
+        <button class="primary" onclick="calculateCGPA()">
+            Calculate CGPA
+        </button>
+
+        <div id="cgpaResult"></div>
+    </div>
+
+</section>
+
+
+<!-- ATTENDANCE -->
+<section id="attendance" class="screen">
+
+    <div class="screen-header">
+        <button class="back" onclick="showHome()">← Back</button>
+        <h1>📊 Attendance Tracker</h1>
+    </div>
+
+    <div class="panel">
+
+        <h2>Check Attendance</h2>
+
+        <label>Subject</label>
+
+        <select id="attendanceSubject">
+            <option>Java</option>
+            <option>Python</option>
+            <option>Data Structures</option>
+            <option>DMGT</option>
+            <option>DLCO</option>
+        </select>
+
+        <div class="row">
+
+            <div>
+                <label>Classes Attended</label>
+                <input type="number" id="attended" min="0">
+            </div>
+
+            <div>
+                <label>Total Classes</label>
+                <input type="number" id="totalClasses" min="1">
+            </div>
+
+        </div>
+
+        <button class="primary" onclick="calculateAttendance()">
+            Check Attendance
+        </button>
+
+        <div id="attendanceResult"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ASSIGNMENTS -->
+<section id="assignments" class="screen">
+
+    <div class="screen-header">
+        <button class="back" onclick="showHome()">← Back</button>
+        <h1>📝 Assignments</h1>
+    </div>
+
+    <div class="panel">
+
+        <h2>Add Assignment</h2>
+
+        <label>Assignment Name</label>
+        <input type="text" id="assignmentName" placeholder="Example: Java Inheritance">
+
+        <label>Subject</label>
+
+        <select id="assignmentSubject">
+            <option>Java</option>
+            <option>Python</option>
+            <option>Data Structures</option>
+            <option>DMGT</option>
+            <option>DLCO</option>
+        </select>
+
+        <label>Due Date</label>
+        <input type="date" id="assignmentDate">
+
+        <button class="primary" onclick="addAssignment()">
+            Add Assignment
+        </button>
+
+    </div>
+
+    <div class="panel">
+        <h2>📌 My Assignments</h2>
+        <div id="assignmentList"></div>
+    </div>
+
+</section>
+
+
+<!-- STUDY SCHEDULE -->
+<section id="study" class="screen">
+
+    <div class="screen-header">
+        <button class="back" onclick="showHome()">← Back</button>
+        <h1>📚 Study Schedule</h1>
+    </div>
+
+    <div class="panel">
+
+        <h2>Create Study Plan</h2>
+
+        <label>Subject</label>
+
+        <select id="studySubject">
+            <option>Java</option>
+            <option>Python</option>
+            <option>Data Structures</option>
+            <option>DMGT</option>
+            <option>DLCO</option>
+        </select>
+
+        <div class="row">
+
+            <div>
+                <label>Start Time</label>
+                <input type="time" id="studyStart">
+            </div>
+
+            <div>
+                <label>End Time</label>
+                <input type="time" id="studyEnd">
+            </div>
+
+        </div>
+
+        <label>What will you study?</label>
+        <input type="text" id="studyTopic" placeholder="Example: Inheritance concepts">
+
+        <button class="primary" onclick="addStudy()">
+            Add to Study Schedule
+        </button>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>📖 Today's Study Schedule</h2>
+
+        <div id="studyList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- DEADLINES -->
+<section id="deadlines" class="screen">
+
+    <div class="screen-header">
+        <button class="back" onclick="showHome()">← Back</button>
+        <h1>⏰ Upcoming Deadlines</h1>
+    </div>
+
+    <div class="panel">
+
+        <h2>Add Important Deadline</h2>
+
+        <label>Event / Exam Name</label>
+        <input type="text" id="deadlineName" placeholder="Example: Java Mid Exam">
+
+        <label>Subject</label>
+
+        <select id="deadlineSubject">
+            <option>Java</option>
+            <option>Python</option>
+            <option>Data Structures</option>
+            <option>DMGT</option>
+            <option>DLCO</option>
+        </select>
+
+        <label>Date</label>
+        <input type="date" id="deadlineDate">
+
+        <label>Time</label>
+        <input type="time" id="deadlineTime">
+
+        <button class="primary" onclick="addDeadline()">
+            Add Deadline
+        </button>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>🔔 Upcoming</h2>
+        <div id="deadlineList"></div>
+
+    </div>
+
+</section>
+
+
+<!-- TIMETABLE -->
+<section id="timetable" class="screen">
+
+    <div class="screen-header">
+        <button class="back" onclick="showHome()">← Back</button>
+        <h1>📅 Timetable</h1>
+    </div>
+
+    <div class="panel">
+
+        <h2>Weekly Timetable</h2>
+
+        <div style="overflow-x:auto;">
+
+            <table class="timetable">
+
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            
+                <tr>
+                    <td>8:00 - 8:50 AM</td>
+                    <td>PYTHON</td>
+                    <td>DL&CO</td>
+                    <td>DM&GT</td>
+                    <td>ADSA</td>
+                    <td>OOPS</td>
+                    <td rowspan="3">PYTHON / ADS LAB</td>
+                </tr>
+            
+                <tr>
+                    <td>8:50 - 9:40 AM</td>
+                    <td>DL&CO</td>
+                    <td>DM&GT</td>
+                    <td>UHV</td>
+                    <td rowspan="3">ADS LAB / OOPS LAB</td>
+                    <td>ADSA</td>
+                </tr>
+            
+                <tr>
+                    <td>10:00 - 10:50 AM</td>
+                    <td>OOPS</td>
+                    <td>PYTHON</td>
+                    <td>OOPS</td>
+                    <td>ES</td>
+                </tr>
+            
+                <tr>
+                    <td>10:50 - 11:40 AM</td>
+                    <td>DM&GT</td>
+                    <td>UHV</td>
+                    <td>ADSA</td>
+                    <td>DL&CO</td>
+                    <td>COUN</td>
+                </tr>
+            
+                <tr>
+                    <td>11:40 AM - 1:00 PM</td>
+                    <td colspan="6">🍱 LUNCH BREAK</td>
+                </tr>
+            
+                <tr>
+                    <td>1:00 - 1:50 PM</td>
+                    <td rowspan="3">OOPS LAB / PYTHON</td>
+                    <td>ADSA</td>
+                    <td>ES</td>
+                    <td>PYTHON</td>
+                    <td>UHV</td>
+                    <td>OOPS</td>
+                </tr>
+            
+                <tr>
+                    <td>1:50 - 2:40 PM</td>
+                    <td>OOPS</td>
+                    <td>PYTHON</td>
+                    <td>DL&CO</td>
+                    <td>DM&GT</td>
+                    <td>DM&GT</td>
+                </tr>
+            
+                <tr>
+                    <td>2:40 - 3:30 PM</td>
+                    <td>LIB</td>
+                    <td>DL&CO</td>
+                    <td>UHV</td>
+                    <td>PYTHON</td>
+                    <td>ADSA</td>
+                </tr>
+            
+            </table>
+
+        </div>
+
+        <p style="margin-top:20px;color:#777;">
+            Your five subjects are already included. We can customize the
+            timings and days later.
+        </p>
+
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    Made with ❤️ for students | CampusKit 🎓
+</footer>
+
+
+<script>
+
+const subjects = [
+    "Java",
+    "Python",
+    "Data Structures",
+    "DMGT",
+    "DLCO"
+];
+
+
+// ---------------- NAVIGATION ----------------
+
+function openScreen(id){
+
+    document.getElementById("home").style.display = "none";
+
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function showHome(){
+
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("home").style.display = "block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+// ---------------- CGPA ----------------
+
+function createCGPASubjects(){
+
+    const container =
+        document.getElementById("cgpaSubjects");
+
+    container.innerHTML = "";
+
+    subjects.forEach((subject,index)=>{
+
+        container.innerHTML += `
+
+        <div class="subject-box">
+
+            <h3>${subject}</h3>
+
+            <div class="row">
+
+                <div>
+                    <label>Marks Obtained</label>
+                    <input
+                        type="number"
+                        id="marks${index}"
+                        min="0"
+                        placeholder="Example: 85">
+                </div>
+
+                <div>
+                    <label>Maximum Marks</label>
+                    <input
+                        type="number"
+                        id="max${index}"
+                        min="1"
+                        value="100">
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+}
+
+
+function calculateCGPA(){
+
+    let totalPercentage = 0;
+
+    for(let i=0;i<subjects.length;i++){
+
+        const marks =
+            Number(document.getElementById("marks"+i).value);
+
+        const max =
+            Number(document.getElementById("max"+i).value);
+
+        if(!max || marks < 0 || marks > max){
+
+            alert("Please enter valid marks for all subjects.");
+            return;
+        }
+
+        const percentage =
+            (marks / max) * 100;
+
+        totalPercentage += percentage;
+    }
+
+    const averagePercentage =
+        totalPercentage / subjects.length;
+
+    /*
+       This is a simple 10-point estimate.
+       Your college may use a different official
+       grade-point conversion system.
+    */
+
+    const cgpa =
+        averagePercentage / 10;
+
+    document.getElementById("cgpaResult").innerHTML = `
+
+        <div class="result">
+
+            <h3>🎉 Your Result</h3>
+
+            <div class="big-result">
+                ${cgpa.toFixed(2)}
+            </div>
+
+            <p>
+                Overall percentage:
+                <strong>${averagePercentage.toFixed(2)}%</strong>
+            </p>
+
+            <p style="margin-top:10px;color:#777;">
+                This is a 10-point estimate based on your average marks.
+                Your college's official CGPA calculation may use
+                subject credits and grade points.
+            </p>
+
+        </div>
+
+    `;
+}
+
+
+// ---------------- ATTENDANCE ----------------
+
+function calculateAttendance(){
+
+    const attended =
+        Number(document.getElementById("attended").value);
+
+    const total =
+        Number(document.getElementById("totalClasses").value);
+
+    const subject =
+        document.getElementById("attendanceSubject").value;
+
+    if(total <= 0 || attended < 0 || attended > total){
+
+        alert("Please enter valid attendance details.");
+        return;
+    }
+
+    const percentage =
+        (attended / total) * 100;
+
+    let html = "";
+
+    if(percentage >= 75){
+
+        const canSkip =
+            Math.floor(
+                (attended - 0.75 * total) / 0.75
+            );
+
+        html = `
+
+        <div class="status safe">
+
+            🟢 SAFE ZONE
+
+            <h2 style="margin-top:10px;">
+                ${percentage.toFixed(2)}%
+            </h2>
+
+            ${
+                canSkip > 0
+                ?
+                `You can skip <strong>${canSkip}</strong>
+                 more class${canSkip>1?"es":""}
+                 and remain at or above 75%.`
+                :
+                `You should not skip another class
+                 if you want to stay safely above 75%.`
+            }
+
+        </div>
+
+        `;
+
+    }
+    else{
+
+        const needed =
+            Math.ceil(
+                (0.75 * total - attended) / 0.25
+            );
+
+        html = `
+
+        <div class="status danger">
+
+            🔴 DANGER ZONE
+
+            <h2 style="margin-top:10px;">
+                ${percentage.toFixed(2)}%
+            </h2>
+
+            <p>
+                Your attendance is below 75%.
+            </p>
+
+            <p style="margin-top:8px;">
+                ❌ Do not skip classes.
+            </p>
+
+            <p style="margin-top:8px;">
+                You need to attend approximately
+                <strong>${needed}</strong>
+                consecutive classes to reach 75%.
+            </p>
+
+        </div>
+
+        `;
+
+    }
+
+    document.getElementById("attendanceResult").innerHTML =
+        html;
+
+}
+
+
+// ---------------- ASSIGNMENTS ----------------
+
+let assignments =
+    JSON.parse(localStorage.getItem("campusAssignments")) || [];
+
+function saveAssignments(){
+
+    localStorage.setItem(
+        "campusAssignments",
+        JSON.stringify(assignments)
+    );
+
+}
+
+function addAssignment(){
+
+    const name =
+        document.getElementById("assignmentName").value.trim();
+
+    const subject =
+        document.getElementById("assignmentSubject").value;
+
+    const date =
+        document.getElementById("assignmentDate").value;
+
+    if(!name || !date){
+
+        alert("Please enter assignment name and due date.");
+        return;
+    }
+
+    assignments.push({
+        name,
+        subject,
+        date,
+        completed:false
+    });
+
+    saveAssignments();
+
+    document.getElementById("assignmentName").value="";
+    document.getElementById("assignmentDate").value="";
+
+    displayAssignments();
+
+}
+
+function completeAssignment(index){
+
+    assignments[index].completed =
+        !assignments[index].completed;
+
+    saveAssignments();
+    displayAssignments();
+
+}
+
+function deleteAssignment(index){
+
+    assignments.splice(index,1);
+
+    saveAssignments();
+    displayAssignments();
+
+}
+
+function displayAssignments(){
+
+    const list =
+        document.getElementById("assignmentList");
+
+    if(assignments.length === 0){
+
+        list.innerHTML =
+            `<div class="empty">No assignments added yet.</div>`;
+
+        return;
+    }
+
+    assignments.sort(
+        (a,b)=>new Date(a.date)-new Date(b.date)
+    );
+
+    list.innerHTML = assignments.map((item,index)=>`
+
+        <div class="list-item ${item.completed?"completed":""}">
+
+            <div>
+
+                <strong>${item.name}</strong>
+
+                <p style="margin-top:5px;">
+                    ${item.subject} • Due:
+                    ${formatDate(item.date)}
+                </p>
+
+            </div>
+
+            <div>
+
+                <button
+                    class="complete-btn"
+                    onclick="completeAssignment(${index})">
+                    ${item.completed?"Undo":"Done"}
+                </button>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteAssignment(${index})">
+                    Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+// ---------------- STUDY SCHEDULE ----------------
+
+let studyPlans =
+    JSON.parse(localStorage.getItem("campusStudy")) || [];
+
+function addStudy(){
+
+    const subject =
+        document.getElementById("studySubject").value;
+
+    const start =
+        document.getElementById("studyStart").value;
+
+    const end =
+        document.getElementById("studyEnd").value;
+
+    const topic =
+        document.getElementById("studyTopic").value.trim();
+
+    if(!start || !end || !topic){
+
+        alert("Please fill all study schedule details.");
+        return;
+    }
+
+    studyPlans.push({
+        subject,
+        start,
+        end,
+        topic
+    });
+
+    localStorage.setItem(
+        "campusStudy",
+        JSON.stringify(studyPlans)
+    );
+
+    document.getElementById("studyTopic").value="";
+
+    displayStudy();
+
+}
+
+function deleteStudy(index){
+
+    studyPlans.splice(index,1);
+
+    localStorage.setItem(
+        "campusStudy",
+        JSON.stringify(studyPlans)
+    );
+
+    displayStudy();
+
+}
+
+function displayStudy(){
+
+    const list =
+        document.getElementById("studyList");
+
+    if(studyPlans.length===0){
+
+        list.innerHTML =
+            `<div class="empty">
+                No study sessions planned yet.
+             </div>`;
+
+        return;
+    }
+
+    list.innerHTML = studyPlans.map((item,index)=>`
+
+        <div class="schedule-item">
+
+            <strong>
+                ${item.start} – ${item.end}
+            </strong>
+
+            <h3 style="margin-top:7px;">
+                ${item.subject}
+            </h3>
+
+            <p style="margin-top:5px;">
+                ${item.topic}
+            </p>
+
+            <button
+                class="delete-btn"
+                style="margin-top:10px;"
+                onclick="deleteStudy(${index})">
+                Delete
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+// ---------------- DEADLINES ----------------
+
+let deadlines =
+    JSON.parse(localStorage.getItem("campusDeadlines")) || [];
+
+function addDeadline(){
+
+    const name =
+        document.getElementById("deadlineName").value.trim();
+
+    const subject =
+        document.getElementById("deadlineSubject").value;
+
+    const date =
+        document.getElementById("deadlineDate").value;
+
+    const time =
+        document.getElementById("deadlineTime").value;
+
+    if(!name || !date){
+
+        alert("Please enter the event name and date.");
+        return;
+    }
+
+    deadlines.push({
+        name,
+        subject,
+        date,
+        time
+    });
+
+    localStorage.setItem(
+        "campusDeadlines",
+        JSON.stringify(deadlines)
+    );
+
+    document.getElementById("deadlineName").value="";
+    document.getElementById("deadlineDate").value="";
+    document.getElementById("deadlineTime").value="";
+
+    displayDeadlines();
+
+}
+
+function deleteDeadline(index){
+
+    deadlines.splice(index,1);
+
+    localStorage.setItem(
+        "campusDeadlines",
+        JSON.stringify(deadlines)
+    );
+
+    displayDeadlines();
+
+}
+
+function daysRemaining(date){
+
+    const today =
+        new Date();
+
+    today.setHours(0,0,0,0);
+
+    const target =
+        new Date(date);
+
+    target.setHours(0,0,0,0);
+
+    const difference =
+        target - today;
+
+    return Math.ceil(
+        difference / (1000*60*60*24)
+    );
+
+}
+
+function displayDeadlines(){
+
+    const list =
+        document.getElementById("deadlineList");
+
+    if(deadlines.length===0){
+
+        list.innerHTML =
+            `<div class="empty">
+                No upcoming deadlines added.
+             </div>`;
+
+        return;
+    }
+
+    deadlines.sort(
+        (a,b)=>new Date(a.date)-new Date(b.date)
+    );
+
+    list.innerHTML = deadlines.map((item,index)=>{
+
+        const days =
+            daysRemaining(item.date);
+
+        let message;
+
+        if(days < 0){
+            message="❌ Past deadline";
+        }
+        else if(days === 0){
+            message="🚨 TODAY";
+        }
+        else if(days === 1){
+            message="⚠️ Tomorrow";
+        }
+        else if(days <= 3){
+            message=`🔔 ${days} days remaining`;
+        }
+        else if(days <= 7){
+            message=`📢 ${days} days remaining`;
+        }
+        else{
+            message=`📅 ${days} days remaining`;
+        }
+
+        return `
+
+        <div class="list-item">
+
+            <div>
+
+                <strong>${item.name}</strong>
+
+                <p style="margin-top:5px;">
+                    ${item.subject} •
+                    ${formatDate(item.date)}
+                    ${item.time ? " • "+item.time : ""}
+                </p>
+
+                <p style="margin-top:8px;color:#6255d9;font-weight:bold;">
+                    ${message}
+                </p>
+
+            </div>
+
+            <button
+                class="delete-btn"
+                onclick="deleteDeadline(${index})">
+                Delete
+            </button>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+// ---------------- HELPERS ----------------
+
+function formatDate(date){
+
+    return new Date(
+        date+"T00:00:00"
+    ).toLocaleDateString(
+        "en-IN",
+        {
+            day:"numeric",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+// ---------------- INITIALIZE ----------------
+
+createCGPASubjects();
+displayAssignments();
+displayStudy();
+displayDeadlines();
+
+</script>
+
+</body>
+</html>

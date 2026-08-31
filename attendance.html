@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance | CampusKit</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #08b6d9, #1769aa);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .top h1 {
+            font-size: 30px;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            background: white;
+            color: #1769aa;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.22);
+            padding: 30px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            outline: none;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 15px;
+            background: #ffe58a;
+            color: #17324d;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .calculate-btn:hover {
+            background: #fff0b5;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            background: rgba(255,255,255,0.95);
+            color: #17324d;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .percentage {
+            font-size: 45px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 10px 0 18px;
+        }
+
+        .safe {
+            background: #d7f8df;
+            color: #16833a;
+        }
+
+        .danger {
+            background: #ffdada;
+            color: #c62828;
+        }
+
+        .message {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .skip-box {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 15px;
+            background: #e8f7ff;
+            color: #1769aa;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 15px;
+            background: #fff0d5;
+            color: #9a5a00;
+            font-weight: bold;
+        }
+
+        .error {
+            display: none;
+            margin-top: 15px;
+            background: #ffdada;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .top h1 {
+                font-size: 24px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <h1>🎓 CampusKit</h1>
+        <a href="index.html" class="home-btn">Home</a>
+    </div>
+
+    <div class="intro">
+        <h2>📊 Attendance Tracker</h2>
+        <p>Check your attendance and know how many classes you can skip.</p>
+    </div>
+
+    <div class="card">
+
+        <div class="input-box">
+            <label>📚 Total Classes Conducted</label>
+            <input type="number" id="totalClasses" placeholder="Enter total classes" min="0">
+        </div>
+
+        <div class="input-box">
+            <label>✅ Classes Attended</label>
+            <input type="number" id="attendedClasses" placeholder="Enter classes attended" min="0">
+        </div>
+
+        <button class="calculate-btn" onclick="calculateAttendance()">
+            Check My Attendance →
+        </button>
+
+        <div class="error" id="error"></div>
+
+        <div class="result" id="result">
+
+            <div>Your Attendance</div>
+
+            <div class="percentage" id="percentage">0%</div>
+
+            <div class="status" id="status"></div>
+
+            <div class="message" id="message"></div>
+
+            <div class="skip-box" id="skipBox"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function calculateAttendance() {
+
+    const total = Number(document.getElementById("totalClasses").value);
+    const attended = Number(document.getElementById("attendedClasses").value);
+
+    const error = document.getElementById("error");
+    const result = document.getElementById("result");
+    const status = document.getElementById("status");
+    const percentage = document.getElementById("percentage");
+    const message = document.getElementById("message");
+    const skipBox = document.getElementById("skipBox");
+
+    error.style.display = "none";
+    result.style.display = "none";
+
+    if (total <= 0 || attended < 0) {
+        error.textContent = "Please enter valid class details.";
+        error.style.display = "block";
+        return;
+    }
+
+    if (attended > total) {
+        error.textContent = "Attended classes cannot be greater than total classes.";
+        error.style.display = "block";
+        return;
+    }
+
+    const attendance = (attended / total) * 100;
+
+    percentage.textContent = attendance.toFixed(2) + "%";
+
+    result.style.display = "block";
+
+    /*
+       Calculate how many consecutive classes can be skipped
+       while keeping attendance at or above 75%.
+    */
+
+    let skip = 0;
+
+    if (attendance >= 75) {
+
+        while (((attended) / (total + skip + 1)) * 100 >= 75) {
+            skip++;
+        }
+
+        status.textContent = "🟢 SAFE ZONE";
+        status.className = "status safe";
+
+        message.innerHTML =
+            "Your attendance is <b>above the required 75%</b>.";
+
+        if (skip > 0) {
+            skipBox.innerHTML =
+                "🎉 You can skip <b>" + skip +
+                " more class" + (skip > 1 ? "es" : "") +
+                " </b> and still stay at 75% or above.";
+        } else {
+            skipBox.innerHTML =
+                "⚠️ You should not skip another class if you want to stay at 75%.";
+        }
+
+    } else {
+
+        status.textContent = "🔴 DANGER ZONE";
+        status.className = "status danger";
+
+        message.innerHTML =
+            "Your attendance is <b>below 75%</b>.<br>" +
+            "You should not skip classes.";
+
+        /*
+           Calculate how many consecutive classes
+           must be attended to reach 75%.
+        */
+
+        let needed = 0;
+
+        while (((attended + needed) / (total + needed)) * 100 < 75) {
+            needed++;
+        }
+
+        skipBox.innerHTML =
+            "⚠️ You need to attend at least <b>" +
+            needed +
+            " more class" + (needed > 1 ? "es" : "") +
+            " </b> consecutively to reach 75%.";
+    }
+}
+
+</script>
+
+</body>
+</html>

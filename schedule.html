@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Schedule | CampusKit</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #7b61ff, #b36cff);
+            color: white;
+            padding: 30px 20px 50px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            background: white;
+            color: #684bd8;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .intro h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.20);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .time-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 15px;
+            background: #fff0a8;
+            color: #39265f;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.01);
+        }
+
+        .day-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .study-item {
+            background: rgba(255,255,255,0.94);
+            color: #30264c;
+            padding: 18px;
+            border-radius: 17px;
+            margin-bottom: 14px;
+        }
+
+        .study-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .study-item p {
+            margin: 5px 0;
+        }
+
+        .priority {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .high {
+            background: #ffdada;
+            color: #c62828;
+        }
+
+        .medium {
+            background: #fff0c2;
+            color: #996500;
+        }
+
+        .low {
+            background: #d7f8df;
+            color: #16833a;
+        }
+
+        .complete-btn {
+            margin-top: 12px;
+            padding: 9px 15px;
+            border: none;
+            border-radius: 10px;
+            background: #684bd8;
+            color: white;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            margin-top: 12px;
+            margin-left: 7px;
+            padding: 9px 15px;
+            border: none;
+            border-radius: 10px;
+            background: #e85d75;
+            color: white;
+            cursor: pointer;
+        }
+
+        .done {
+            opacity: 0.65;
+        }
+
+        .done h3 {
+            text-decoration: line-through;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .intro h1 {
+                font-size: 30px;
+            }
+
+            .time-row {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <div class="logo">🎓 CampusKit</div>
+        <a href="index.html" class="home-btn">← Home</a>
+    </div>
+
+    <div class="intro">
+        <h1>📚 Study Schedule</h1>
+        <p>Plan your study time and stay consistent.</p>
+    </div>
+
+    <div class="card">
+
+        <h2>➕ Create Study Plan</h2>
+
+        <div class="input-group">
+            <label>📅 Day</label>
+            <select id="day">
+                <option value="">Select Day</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>📚 Subject</label>
+            <select id="subject">
+                <option value="">Select Subject</option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>Data Structures</option>
+                <option>DMGT</option>
+                <option>DLCO</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>📝 What do you want to study?</label>
+            <input type="text" id="topic"
+                   placeholder="Example: Inheritance, Linked Lists, Functions">
+        </div>
+
+        <div class="time-row">
+
+            <div class="input-group">
+                <label>⏰ Start Time</label>
+                <input type="time" id="startTime">
+            </div>
+
+            <div class="input-group">
+                <label>⏰ End Time</label>
+                <input type="time" id="endTime">
+            </div>
+
+        </div>
+
+        <div class="input-group">
+            <label>⭐ Priority</label>
+            <select id="priority">
+                <option value="">Select Priority</option>
+                <option value="High">🔴 High</option>
+                <option value="Medium">🟡 Medium</option>
+                <option value="Low">🟢 Low</option>
+            </select>
+        </div>
+
+        <button class="add-btn" onclick="addStudyTask()">
+            ➕ Add to My Schedule
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📖 My Study Schedule</h2>
+
+        <div id="scheduleList">
+            <div class="empty">
+                No study sessions added yet.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let studyTasks = JSON.parse(localStorage.getItem("campusStudyTasks")) || [];
+displaySchedule();
+function addStudyTask() {
+
+    const day = document.getElementById("day").value;
+    const subject = document.getElementById("subject").value;
+    const topic = document.getElementById("topic").value.trim();
+    const startTime = document.getElementById("startTime").value;
+    const endTime = document.getElementById("endTime").value;
+    const priority = document.getElementById("priority").value;
+
+    if (
+        day === "" ||
+        subject === "" ||
+        topic === "" ||
+        startTime === "" ||
+        endTime === "" ||
+        priority === ""
+    ) {
+        alert("Please fill in all the study schedule details.");
+        return;
+    }
+
+    if (startTime >= endTime) {
+        alert("End time must be after start time.");
+        return;
+    }
+
+    studyTasks.push({
+        day: day,
+        subject: subject,
+        topic: topic,
+        startTime: startTime,
+        endTime: endTime,
+        priority: priority,
+        completed: false
+    });
+    localStorage.setItem("campusStudyTasks", JSON.stringify(studyTasks));
+
+    document.getElementById("day").value = "";
+    document.getElementById("subject").value = "";
+    document.getElementById("topic").value = "";
+    document.getElementById("startTime").value = "";
+    document.getElementById("endTime").value = "";
+    document.getElementById("priority").value = "";
+
+    displaySchedule();
+}
+
+
+function displaySchedule() {
+
+    const list = document.getElementById("scheduleList");
+
+    if (studyTasks.length === 0) {
+
+        list.innerHTML = `
+            <div class="empty">
+                No study sessions added yet.
+            </div>
+        `;
+
+        return;
+    }
+
+    const days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ];
+
+    list.innerHTML = "";
+
+    days.forEach(day => {
+
+        const tasks = studyTasks.filter(task => task.day === day);
+
+        if (tasks.length === 0) {
+            return;
+        }
+
+        list.innerHTML += `
+            <div class="day-title">
+                📅 ${day}
+            </div>
+        `;
+
+        tasks.sort((a, b) =>
+            a.startTime.localeCompare(b.startTime)
+        );
+
+        tasks.forEach(task => {
+
+            const index = studyTasks.indexOf(task);
+
+            let priorityClass = "";
+
+            if (task.priority === "High") {
+                priorityClass = "high";
+            } 
+            else if (task.priority === "Medium") {
+                priorityClass = "medium";
+            } 
+            else {
+                priorityClass = "low";
+            }
+
+            list.innerHTML += `
+                <div class="study-item ${task.completed ? "done" : ""}">
+
+                    <h3>${task.subject} — ${task.topic}</h3>
+
+                    <p>⏰ <b>${formatTime(task.startTime)}
+                    - ${formatTime(task.endTime)}</b></p>
+
+                    <span class="priority ${priorityClass}">
+                        ${task.priority} Priority
+                    </span>
+
+                    <br>
+
+                    ${
+                        !task.completed
+                        ? `<button class="complete-btn"
+                           onclick="completeTask(${index})">
+                           ✓ Completed
+                           </button>`
+                        : `<button class="complete-btn"
+                           onclick="completeTask(${index})">
+                           ↩ Mark Pending
+                           </button>`
+                    }
+
+                    <button class="delete-btn"
+                    onclick="deleteTask(${index})">
+                    🗑 Delete
+                    </button>
+
+                </div>
+            `;
+        });
+
+    });
+}
+
+
+function completeTask(index) {
+
+    studyTasks[index].completed =
+        !studyTasks[index].completed;
+
+    displaySchedule();
+}
+
+
+function deleteTask(index) {
+
+    studyTasks.splice(index, 1);
+
+    displaySchedule();
+}
+
+
+function formatTime(time) {
+
+    let [hour, minute] = time.split(":");
+
+    hour = parseInt(hour);
+
+    const ampm = hour >= 12 ? "PM" : "AM";
+
+    hour = hour % 12;
+
+    if (hour === 0) {
+        hour = 12;
+    }
+
+    return hour + ":" + minute + " " + ampm;
+}
+
+</script>
+
+</body>
+</html>

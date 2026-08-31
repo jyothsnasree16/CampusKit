@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Timetable | CampusKit</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #00a8cc, #0066cc);
+    color: white;
+    padding: 25px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 32px;
+}
+
+.home-btn {
+    text-decoration: none;
+    color: #333;
+    background: #fff4b8;
+    padding: 12px 22px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+.info {
+    background: rgba(255,255,255,0.18);
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.info h2 {
+    margin-bottom: 8px;
+}
+
+.table-box {
+    background: rgba(255,255,255,0.18);
+    padding: 15px;
+    border-radius: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 950px;
+    background: white;
+    color: #222;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #b5b5b5;
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+th {
+    background: #075b91;
+    color: white;
+}
+
+.day {
+    font-weight: bold;
+    background: #e7f5ff;
+}
+
+.subject {
+    font-weight: bold;
+}
+
+.lab {
+    background: #fff1b8;
+}
+
+.break {
+    background: #dff7ff;
+    font-weight: bold;
+}
+
+.note {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.18);
+    padding: 18px;
+    border-radius: 18px;
+}
+
+.note h3 {
+    margin-bottom: 10px;
+}
+
+.note p {
+    line-height: 1.7;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    padding: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>📚 My Timetable</h1>
+        <a href="index.html" class="home-btn">Home</a>
+    </div>
+
+    <div class="info">
+        <h2>II B.Tech I Sem</h2>
+        <p><b>Class:</b> IT - A &nbsp; | &nbsp; <b>Room:</b> D-203</p>
+    </div>
+
+    <div class="table-box">
+
+        <table>
+
+            <tr>
+                <th>DAY</th>
+                <th>1<br>8:00 - 8:50</th>
+                <th>2<br>8:50 - 9:40</th>
+                <th>3<br>10:00 - 10:50</th>
+                <th>4<br>10:50 - 11:40</th>
+                <th>5<br>1:00 - 1:50</th>
+                <th>6<br>1:50 - 2:40</th>
+                <th>7<br>2:40 - 3:30</th>
+            </tr>
+
+            <!-- MONDAY -->
+            <tr>
+                <td class="day">MON</td>
+                <td class="subject">PYTHON</td>
+                <td class="subject">DL&CO</td>
+                <td class="subject">OOPS</td>
+                <td class="subject">DM&GT</td>
+                <td colspan="3" class="lab">
+                    OOPS LAB / PYTHON
+                </td>
+            </tr>
+
+            <!-- TUESDAY -->
+            <tr>
+                <td class="day">TUE</td>
+                <td class="subject">DL&CO</td>
+                <td class="subject">DM&GT</td>
+                <td class="subject">PYTHON</td>
+                <td class="subject">UHV</td>
+                <td class="subject">ADSA</td>
+                <td class="subject">OOPS</td>
+                <td>LIB</td>
+            </tr>
+
+            <!-- WEDNESDAY -->
+            <tr>
+                <td class="day">WED</td>
+                <td class="subject">DM&GT</td>
+                <td class="subject">UHV</td>
+                <td class="subject">OOPS</td>
+                <td class="subject">ADSA</td>
+                <td>ES</td>
+                <td class="subject">PYTHON</td>
+                <td class="subject">DL&CO</td>
+            </tr>
+
+            <!-- THURSDAY -->
+            <tr>
+                <td class="day">THU</td>
+                <td class="subject">ADSA</td>
+                <td colspan="3" class="lab">
+                    ADS LAB / OOPS LAB
+                </td>
+                <td class="subject">PYTHON</td>
+                <td class="subject">DL&CO</td>
+                <td class="subject">UHV</td>
+            </tr>
+
+            <!-- FRIDAY -->
+            <tr>
+                <td class="day">FRI</td>
+                <td class="subject">OOPS</td>
+                <td class="subject">ADSA</td>
+                <td>ES</td>
+                <td class="subject">DL&CO</td>
+                <td class="subject">UHV</td>
+                <td class="subject">DM&GT</td>
+                <td class="subject">PYTHON</td>
+            </tr>
+
+            <!-- SATURDAY -->
+            <tr>
+                <td class="day">SAT</td>
+                <td colspan="3" class="lab">
+                    PYTHON / ADS LAB
+                </td>
+                <td>COUN</td>
+                <td class="subject">OOPS</td>
+                <td class="subject">DM&GT</td>
+                <td class="subject">ADSA</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="note">
+        <h3>⏰ Lunch Break</h3>
+        <p>
+            <b>11:40 AM - 1:00 PM</b>
+        </p>
+
+        <h3 style="margin-top:15px;">📖 Subject Details</h3>
+
+        <p>
+            <b>DM&GT</b> – Discrete Mathematics & Graph Theory<br>
+            <b>UHV</b> – Universal Human Values<br>
+            <b>DL&CO</b> – Digital Logic & Computer Organization<br>
+            <b>ADSA</b> – Advanced Data Structures & Algorithms<br>
+            <b>OOPS</b> – Object Oriented Programming Through Java<br>
+            <b>PYTHON</b> – Python Programming<br>
+            <b>ES</b> – Environmental Science
+        </p>
+    </div>
+
+    <footer>
+        Made with ❤️ for students | CampusKit 🎓
+    </footer>
+
+</div>
+
+</body>
+</html>

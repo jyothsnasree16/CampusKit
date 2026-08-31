@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Tracker | CampusKit</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #8e9cff);
+            color: white;
+            padding-bottom: 40px;
+        }
+
+        header {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #333;
+            background: #fff9c4;
+            padding: 12px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 45px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            font-size: 18px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .subject {
+            background: rgba(255,255,255,0.18);
+            padding: 20px;
+            margin-bottom: 18px;
+            border-radius: 18px;
+        }
+
+        .subject-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .subject-name {
+            font-size: 20px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        input {
+            width: 150px;
+            padding: 13px;
+            border: none;
+            border-radius: 12px;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.4);
+        }
+
+        .calculate {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            border: none;
+            border-radius: 30px;
+            background: #fff9c4;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .calculate:hover {
+            transform: scale(1.02);
+        }
+
+        #result {
+            display: none;
+            margin-top: 30px;
+            text-align: center;
+            background: rgba(255,255,255,0.22);
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        #result h2 {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .cgpa-number {
+            font-size: 55px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .message {
+            font-size: 18px;
+        }
+
+        .info {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(0,0,0,0.12);
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .title h1 {
+                font-size: 32px;
+            }
+
+            .subject-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🎓 CampusKit</div>
+
+    <a href="index.html" class="back-btn">
+        ← Home
+    </a>
+</header>
+
+<div class="container">
+
+    <div class="title">
+        <h1>CGPA Tracker 🎓</h1>
+        <p>Enter your marks and calculate your overall CGPA</p>
+    </div>
+
+    <div class="card">
+
+        <div class="subject">
+            <div class="subject-row">
+                <div class="subject-name">☕ Java</div>
+                <input type="number" id="java" min="0" max="100"
+                       placeholder="Marks / 100">
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-row">
+                <div class="subject-name">🐍 Python</div>
+                <input type="number" id="python" min="0" max="100"
+                       placeholder="Marks / 100">
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-row">
+                <div class="subject-name">🌳 Data Structures</div>
+                <input type="number" id="ds" min="0" max="100"
+                       placeholder="Marks / 100">
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-row">
+                <div class="subject-name">📐 DMGT</div>
+                <input type="number" id="dmgt" min="0" max="100"
+                       placeholder="Marks / 100">
+            </div>
+        </div>
+
+        <div class="subject">
+            <div class="subject-row">
+                <div class="subject-name">💻 DLCO</div>
+                <input type="number" id="dlco" min="0" max="100"
+                       placeholder="Marks / 100">
+            </div>
+        </div>
+
+        <button class="calculate" onclick="calculateCGPA()">
+            Calculate My CGPA →
+        </button>
+
+        <div id="result">
+            <h2>Your Overall CGPA</h2>
+
+            <div class="cgpa-number" id="cgpaValue">
+                0.00
+            </div>
+
+            <div class="message" id="message">
+                Great job! 🎉
+            </div>
+        </div>
+
+        <div class="info">
+            <strong>How it works:</strong><br>
+            Your marks are converted into grade points and the average
+            grade point is shown as your CGPA.
+            <br><br>
+            90–100 = 10 points<br>
+            80–89 = 9 points<br>
+            70–79 = 8 points<br>
+            60–69 = 7 points<br>
+            50–59 = 6 points<br>
+            40–49 = 5 points<br>
+            Below 40 = 0 points
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    Made with ❤️ for students | CampusKit 🎓
+</footer>
+
+
+<script>
+
+function getGradePoint(mark) {
+
+    if (mark >= 90) {
+        return 10;
+    } 
+    else if (mark >= 80) {
+        return 9;
+    } 
+    else if (mark >= 70) {
+        return 8;
+    } 
+    else if (mark >= 60) {
+        return 7;
+    } 
+    else if (mark >= 50) {
+        return 6;
+    } 
+    else if (mark >= 40) {
+        return 5;
+    } 
+    else {
+        return 0;
+    }
+}
+
+
+function calculateCGPA() {
+
+const java = Number(document.getElementById("java").value);
+const python = Number(document.getElementById("python").value);
+const ds = Number(document.getElementById("ds").value);
+const dmgt = Number(document.getElementById("dmgt").value);
+const dlco = Number(document.getElementById("dlco").value);
+
+const subjects = [
+    ["Java", java],
+    ["Python", python],
+    ["Data Structures", ds],
+    ["DMGT", dmgt],
+    ["DLCO", dlco]
+];
+
+for (let subject of subjects) {
+    if (subject[1] < 0 || subject[1] > 100 || isNaN(subject[1])) {
+        alert("Please enter valid marks for all five subjects.");
+        return;
+    }
+}
+
+function getGrade(mark) {
+    if (mark >= 90) return "S";
+    if (mark >= 80) return "A";
+    if (mark >= 70) return "B";
+    if (mark >= 60) return "C";
+    if (mark >= 50) return "D";
+    if (mark >= 35) return "E";
+    return "F";
+}
+
+const totalMarks = java + python + ds + dmgt + dlco;
+const average = totalMarks / 5;
+
+const grades = subjects.map(subject => ({
+    name: subject[0],
+    mark: subject[1],
+    grade: getGrade(subject[1])
+}));
+
+const failed = grades.some(subject => subject.mark < 35);
+
+let gradeHTML = "";
+
+grades.forEach(subject => {
+    gradeHTML += `
+        <p>
+            <strong>${subject.name}:</strong>
+            ${subject.mark} marks →
+            <strong>${subject.grade}</strong>
+            ${subject.grade === "F" ? " (Fail)" : ""}
+        </p>
+    `;
+});
+
+let resultHTML = `
+    <div class="result">
+        <h3>🎓 Your Result</h3>
+`;
+
+if (failed) {
+    resultHTML += `
+        <div class="big-result">
+            FAIL
+        </div>
+
+        <p>
+            You have scored below 35 marks in one or more subjects.
+        </p>
+    `;
+} else {
+    const cgpa = average / 10;
+
+    resultHTML += `
+        <div class="big-result">
+            ${cgpa.toFixed(2)}
+        </div>
+
+        <p>
+            Overall Percentage:
+            <strong>${average.toFixed(2)}%</strong>
+        </p>
+    `;
+}
+
+resultHTML += `
+    <h3>📚 Subject Grades</h3>
+    ${gradeHTML}
+
+    <p style="margin-top:20px;color:#777;">
+        S = 90–100 | A = 80–89 | B = 70–79 |
+        C = 60–69 | D = 50–59 | E = 35–49 |
+        F = Below 35 (Fail)
+    </p>
+
+    </div>
+`;
+
+document.getElementById("result").innerHTML = resultHTML;
+}
+
+</script>
+
+</body>
+</html>
