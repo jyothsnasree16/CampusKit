@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>CampusKit - Login</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -21,8 +18,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #4facfe, #00c6ff);
             padding: 20px;
+            background: linear-gradient(135deg, #4facfe, #7367f0, #9b59b6);
         }
 
         .login-container {
@@ -31,7 +28,7 @@
             background: white;
             padding: 40px 30px;
             border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
         .logo {
@@ -95,13 +92,6 @@
             color: #087ea4;
             font-weight: bold;
             cursor: pointer;
-            font-size: 13px;
-        }
-
-        .hint {
-            font-size: 12px;
-            color: #777;
-            margin-top: 6px;
         }
 
         .login-btn {
@@ -129,15 +119,17 @@
             min-height: 20px;
         }
 
-        .info {
-            margin-top: 25px;
-            padding: 15px;
-            background: #eefaff;
-            border-radius: 12px;
-            color: #555;
-            font-size: 12px;
+        .signup-link {
             text-align: center;
-            line-height: 1.6;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #087ea4;
+            font-weight: bold;
+            text-decoration: none;
         }
 
         .footer {
@@ -146,325 +138,245 @@
             font-size: 12px;
             color: #999;
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-    <div class="login-container">
+<div class="login-container">
 
-        <div class="logo">
-            CampusKit 🎓
+    <div class="logo">
+        CampusKit 🎓
+    </div>
+
+    <div class="subtitle">
+        Student Login
+    </div>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <label for="rollNumber">Roll Number</label>
+
+            <input
+                type="text"
+                id="rollNumber"
+                placeholder="Enter your roll number"
+                required
+            >
         </div>
 
-        <div class="subtitle">
-            Student Campus Management System
+        <div class="input-group">
+            <label for="branch">Branch</label>
+
+            <select id="branch" required>
+
+                <option value="">
+                    Select your branch
+                </option>
+
+                <option value="IT">
+                    Information Technology (IT)
+                </option>
+
+                <option value="CSE">
+                    Computer Science & Engineering (CSE)
+                </option>
+
+                <option value="ECE">
+                    Electronics & Communication (ECE)
+                </option>
+
+                <option value="EEE">
+                    Electrical & Electronics (EEE)
+                </option>
+
+                <option value="MECH">
+                    Mechanical Engineering
+                </option>
+
+                <option value="CIVIL">
+                    Civil Engineering
+                </option>
+
+                <option value="AIML">
+                    Artificial Intelligence & Machine Learning
+                </option>
+
+                <option value="DS">
+                    Data Science (DS)
+                </option>
+
+            </select>
         </div>
 
+        <div class="input-group">
 
-        <form id="loginForm">
+            <label for="password">
+                Password
+            </label>
 
-
-            <!-- Roll Number -->
-
-            <div class="input-group">
-
-                <label for="rollNumber">
-                    Roll Number
-                </label>
+            <div class="password-box">
 
                 <input
-                    type="text"
-                    id="rollNumber"
-                    placeholder="Enter your roll number"
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
                     required
                 >
 
-                <div class="hint">
-                    Example: 25B01A1201
-                </div>
+                <button
+                    type="button"
+                    class="show-password"
+                    onclick="togglePassword()"
+                    id="showButton"
+                >
+                    Show
+                </button>
 
             </div>
-
-
-            <!-- Branch -->
-
-            <div class="input-group">
-
-                <label for="branch">
-                    Branch
-                </label>
-
-                <select id="branch" required>
-
-                    <option value="">
-                        Select your branch
-                    </option>
-
-                    <option value="IT">
-                        Information Technology (IT)
-                    </option>
-
-                    <option value="CSE">
-                        Computer Science & Engineering (CSE)
-                    </option>
-
-                    <option value="ECE">
-                        Electronics & Communication (ECE)
-                    </option>
-
-                    <option value="EEE">
-                        Electrical & Electronics (EEE)
-                    </option>
-
-                    <option value="MECH">
-                        Mechanical Engineering
-                    </option>
-
-                    <option value="CIVIL">
-                        Civil Engineering
-                    </option>
-
-                    <option value="AIML">
-                        Artificial Intelligence & Machine Learning
-                    </option>
-
-                    <option value="DS">
-                        Data Science (DS)
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- Password -->
-
-            <div class="input-group">
-
-                <label for="password">
-                    Password
-                </label>
-
-                <div class="password-box">
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter password (1234)"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="show-password"
-                        onclick="togglePassword()"
-                        id="showButton"
-                    >
-                        Show
-                    </button>
-
-                </div>
-
-                <div class="hint">
-                    Password: 1234
-                </div>
-
-            </div>
-
-
-            <!-- Login Button -->
-
-            <button
-                type="submit"
-                class="login-btn"
-            >
-                🔐 Login
-            </button>
-
-
-            <div
-                class="message"
-                id="message"
-            ></div>
-
-
-        </form>
-
-
-        <div class="info">
-
-            <b>CampusKit</b><br>
-
-            Enter your roll number, select your branch
-            and enter your password to continue.
 
         </div>
 
+        <button
+            type="submit"
+            class="login-btn"
+        >
+            🔐 Login
+        </button>
 
-        <div class="footer">
+        <div
+            class="message"
+            id="message"
+        ></div>
 
-            Made with ❤️ for students | CampusKit
+    </form>
 
-        </div>
+    <div class="signup-link">
 
+        Don't have an account?
+
+        <a href="signup.html">
+            Create Account
+        </a>
 
     </div>
 
+    <div class="footer">
+        Made with ❤️ for students | CampusKit
+    </div>
 
-    <script>
+</div>
 
 
-        // Show / Hide Password
+<script>
 
-        function togglePassword() {
+function togglePassword() {
 
-            const password =
-                document.getElementById("password");
+    const password =
+        document.getElementById("password");
 
-            const showButton =
-                document.getElementById("showButton");
+    const button =
+        document.getElementById("showButton");
 
+    if (password.type === "password") {
 
-            if (password.type === "password") {
+        password.type = "text";
+        button.textContent = "Hide";
 
-                password.type = "text";
+    } else {
 
-                showButton.textContent = "Hide";
+        password.type = "password";
+        button.textContent = "Show";
 
-            }
+    }
+}
 
-            else {
 
-                password.type = "password";
+document
+.getElementById("loginForm")
+.addEventListener("submit", function(event) {
 
-                showButton.textContent = "Show";
+    event.preventDefault();
 
-            }
+    const rollNumber =
+        document.getElementById("rollNumber").value.trim();
 
-        }
+    const branch =
+        document.getElementById("branch").value;
 
+    const password =
+        document.getElementById("password").value;
 
+    const message =
+        document.getElementById("message");
 
-        // Login
 
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", function(event) {
+    const savedPassword =
+        localStorage.getItem("campuskitPassword");
 
 
-                event.preventDefault();
+    /* Check whether an account has been created */
 
+    if (!savedPassword) {
 
-                const rollNumber =
-                    document
-                    .getElementById("rollNumber")
-                    .value
-                    .trim();
+        message.style.color = "red";
 
+        message.textContent =
+            "❌ Please create an account first.";
 
-                const branch =
-                    document
-                    .getElementById("branch")
-                    .value;
+        return;
+    }
 
 
-                const password =
-                    document
-                    .getElementById("password")
-                    .value;
+    /* Password must exactly match signup password */
 
+    if (password !== savedPassword) {
 
-                const message =
-                    document
-                    .getElementById("message");
+        message.style.color = "red";
 
+        message.textContent =
+            "❌ Incorrect password.";
 
+        return;
+    }
 
-                // Check Roll Number
 
-                if (rollNumber === "") {
+    /* Save login status */
 
-                    message.style.color = "red";
+    localStorage.setItem(
+        "campuskitLoggedIn",
+        "true"
+    );
 
-                    message.textContent =
-                        "❌ Please enter your roll number.";
+    localStorage.setItem(
+        "campuskitRollNumber",
+        rollNumber
+    );
 
-                    return;
+    localStorage.setItem(
+        "campuskitBranch",
+        branch
+    );
 
-                }
 
+    message.style.color = "green";
 
+    message.textContent =
+        "✅ Login successful!";
 
-                // Check Branch
 
-                if (branch === "") {
+    /* Open homepage */
 
-                    message.style.color = "red";
+    setTimeout(function() {
 
-                    message.textContent =
-                        "❌ Please select your branch.";
+        window.location.href = "index.html";
 
-                    return;
+    }, 700);
 
-                }
+});
 
-
-
-                // Password must be 1234
-
-                if (password !== "1234") {
-
-                    message.style.color = "red";
-
-                    message.textContent =
-                        "❌ Incorrect password. Please enter 1234.";
-
-                    return;
-
-                }
-
-
-
-                // Successful Login
-
-                message.style.color = "green";
-
-                message.textContent =
-                    "✅ Login successful!";
-
-
-
-                // Save student information
-
-                localStorage.setItem(
-                    "campuskitRollNumber",
-                    rollNumber
-                );
-
-                localStorage.setItem(
-                    "campuskitBranch",
-                    branch
-                );
-
-
-
-                // Open existing home page
-
-                setTimeout(function() {
-
-                    window.location.href = "index.html";
-
-                }, 700);
-
-
-            });
-
-    </script>
+</script>
 
 </body>
-
 </html>
