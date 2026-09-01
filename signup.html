@@ -7,9 +7,9 @@
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
@@ -18,158 +18,239 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
             background: linear-gradient(135deg, #4facfe, #7367f0, #9b59b6);
-            color: white;
         }
 
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 430px;
             background: white;
-            color: #333;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            padding: 35px 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
         }
 
-        h1 {
+        .logo {
             text-align: center;
-            color: #7367f0;
+            font-size: 38px;
+            font-weight: bold;
+            color: #087ea4;
             margin-bottom: 8px;
         }
 
         .subtitle {
             text-align: center;
-            color: #777;
-            margin-bottom: 25px;
+            color: #666;
+            margin-bottom: 28px;
+        }
+
+        .group {
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
             font-weight: bold;
+            color: #333;
         }
 
         input {
             width: 100%;
-            padding: 13px;
-            margin-bottom: 18px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 14px;
+            border: 2px solid #dceef5;
+            border-radius: 12px;
             font-size: 15px;
+            outline: none;
         }
 
         input:focus {
-            outline: none;
-            border-color: #7367f0;
+            border-color: #00a8d6;
         }
 
-        button {
+        .create-btn {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             border: none;
-            border-radius: 8px;
-            background: #7367f0;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #00a8d6, #087ea4);
             color: white;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 8px;
         }
 
-        button:hover {
-            background: #5d54d6;
+        .message {
+            text-align: center;
+            margin-top: 18px;
+            font-weight: bold;
+            min-height: 20px;
         }
 
         .login-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 22px;
             color: #666;
         }
 
         .login-link a {
-            color: #7367f0;
+            color: #087ea4;
             font-weight: bold;
             text-decoration: none;
-        }
-
-        #message {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>CampusKit</h1>
+    <div class="logo">
+        CampusKit 🎓
+    </div>
 
-        <p class="subtitle">Create your account</p>
+    <div class="subtitle">
+        Create Your Account
+    </div>
 
-        <form id="signupForm">
+    <form id="signupForm">
 
+        <div class="group">
             <label for="email">Email Address</label>
+
             <input
                 type="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
                 required
             >
+        </div>
 
+        <div class="group">
             <label for="username">Username</label>
+
             <input
                 type="text"
                 id="username"
-                placeholder="Create a username"
+                placeholder="Create your username"
                 required
             >
+        </div>
 
-            <label for="password">Password</label>
+        <div class="group">
+            <label for="password">Create Password</label>
+
             <input
                 type="password"
                 id="password"
-                placeholder="Create a password"
+                placeholder="Create your password"
                 required
             >
+        </div>
 
-            <button type="submit">Create Account</button>
+        <div class="group">
+            <label for="confirmPassword">Confirm Password</label>
 
-        </form>
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+            >
+        </div>
 
-        <p id="message"></p>
+        <button type="submit" class="create-btn">
+            📝 Create Account
+        </button>
 
-        <p class="login-link">
-            Already have an account?
-            <a href="login.html">Login</a>
-        </p>
+        <div id="message" class="message"></div>
 
+    </form>
+
+    <div class="login-link">
+        Already have an account?
+        <a href="login.html">Login</a>
     </div>
 
-    <script>
-        document.getElementById("signupForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+</div>
 
-            const email = document.getElementById("email").value;
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+<script>
 
-            if (email && username && password) {
+document.getElementById("signupForm").addEventListener("submit", function(event) {
 
-                localStorage.setItem("campuskitEmail", email);
-                localStorage.setItem("campuskitUsername", username);
-                localStorage.setItem("campuskitPassword", password);
+    event.preventDefault();
 
-                document.getElementById("message").innerText =
-                    "Account created successfully!";
+    const email =
+        document.getElementById("email").value.trim();
 
-                setTimeout(function() {
-                    window.location.href = "login.html";
-                }, 1000);
-            }
-        });
-    </script>
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    if (password !== confirmPassword) {
+
+        message.style.color = "red";
+
+        message.textContent =
+            "❌ Passwords do not match.";
+
+        return;
+    }
+
+
+    if (password.length < 4) {
+
+        message.style.color = "red";
+
+        message.textContent =
+            "❌ Password must contain at least 4 characters.";
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "campuskitEmail",
+        email
+    );
+
+    localStorage.setItem(
+        "campuskitUsername",
+        username
+    );
+
+    localStorage.setItem(
+        "campuskitPassword",
+        password
+    );
+
+
+    message.style.color = "green";
+
+    message.textContent =
+        "✅ Account created successfully!";
+
+
+    setTimeout(function() {
+
+        window.location.href = "login.html";
+
+    }, 1000);
+
+});
+
+</script>
 
 </body>
 </html>
