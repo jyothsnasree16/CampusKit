@@ -1,262 +1,1226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Timetable | CampusKit</title>
+    <title>CampusKit - Timetable</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #00a8cc, #0066cc);
-    color: white;
-    padding: 25px;
-}
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #7367f0, #9b59b6);
+            color: #222;
+            padding: 20px;
+        }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-}
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
+        /* HEADER */
 
-.header h1 {
-    font-size: 32px;
-}
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
 
-.home-btn {
-    text-decoration: none;
-    color: #333;
-    background: #fff4b8;
-    padding: 12px 22px;
-    border-radius: 25px;
-    font-weight: bold;
-}
+        .header h1 {
+            color: #087ea4;
+            margin-bottom: 8px;
+        }
 
-.info {
-    background: rgba(255,255,255,0.18);
-    padding: 18px;
-    border-radius: 18px;
-    margin-bottom: 20px;
-    text-align: center;
-}
+        .header p {
+            color: #666;
+        }
 
-.info h2 {
-    margin-bottom: 8px;
-}
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: #087ea4;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.table-box {
-    background: rgba(255,255,255,0.18);
-    padding: 15px;
-    border-radius: 20px;
-    overflow-x: auto;
-}
+        /* SETUP CARD */
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 950px;
-    background: white;
-    color: #222;
-    border-radius: 12px;
-    overflow: hidden;
-}
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
 
-th, td {
-    border: 1px solid #b5b5b5;
-    padding: 14px 10px;
-    text-align: center;
-    font-size: 14px;
-}
+        .card h2 {
+            color: #087ea4;
+            margin-bottom: 20px;
+        }
 
-th {
-    background: #075b91;
-    color: white;
-}
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
 
-.day {
-    font-weight: bold;
-    background: #e7f5ff;
-}
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
 
-.subject {
-    font-weight: bold;
-}
+        select,
+        input[type="text"],
+        input[type="time"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dceef5;
+            border-radius: 10px;
+            background: #f8fcff;
+            font-size: 15px;
+            outline: none;
+        }
 
-.lab {
-    background: #fff1b8;
-}
+        select:focus,
+        input:focus {
+            border-color: #00a8d6;
+        }
 
-.break {
-    background: #dff7ff;
-    font-weight: bold;
-}
+        /* PERIOD TIMINGS */
 
-.note {
-    margin-top: 20px;
-    background: rgba(255,255,255,0.18);
-    padding: 18px;
-    border-radius: 18px;
-}
+        .period-box {
+            margin-top: 20px;
+        }
 
-.note h3 {
-    margin-bottom: 10px;
-}
+        .period-box h3 {
+            color: #555;
+            margin-bottom: 15px;
+        }
 
-.note p {
-    line-height: 1.7;
-}
+        .period-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
 
-footer {
-    text-align: center;
-    margin-top: 25px;
-    padding: 15px;
-}
-</style>
+        .period-number {
+            font-weight: bold;
+            color: #087ea4;
+        }
+
+        /* BUTTONS */
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #00a8d6, #087ea4);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+        }
+
+        .secondary-btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #eee;
+            color: #333;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .danger-btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #e74c3c;
+            color: white;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* DAY NAMES */
+
+        .day-box {
+            margin-top: 20px;
+        }
+
+        .day-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        /* TIMETABLE */
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #087ea4;
+            color: white;
+            padding: 14px 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            background: #fff;
+        }
+
+        td.day-cell {
+            font-weight: bold;
+            color: #087ea4;
+            background: #eefaff;
+            min-width: 100px;
+        }
+
+        .subject-input {
+            width: 100%;
+            min-width: 100px;
+            border: 1px solid #d5e5eb;
+            border-radius: 7px;
+            padding: 10px 7px;
+            text-align: center;
+            background: #f9fdff;
+            outline: none;
+        }
+
+        .subject-input:focus {
+            border: 2px solid #00a8d6;
+            background: white;
+        }
+
+        .time-heading {
+            font-size: 12px;
+            margin-top: 4px;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+
+        /* SAVED MESSAGE */
+
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #e8f8ee;
+            color: #188a43;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .period-row {
+                grid-template-columns: 60px 1fr 1fr;
+            }
+
+            .day-row {
+                grid-template-columns: 80px 1fr;
+            }
+
+            .header,
+            .card {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container">
 
+    <!-- HEADER -->
+
     <div class="header">
-        <h1>📚 My Timetable</h1>
-        <a href="index.html" class="home-btn">Home</a>
-    </div>
 
-    <div class="info">
-        <h2>II B.Tech I Sem</h2>
-        <p><b>Class:</b> IT - A &nbsp; | &nbsp; <b>Room:</b> D-203</p>
-    </div>
-
-    <div class="table-box">
-
-        <table>
-
-            <tr>
-                <th>DAY</th>
-                <th>1<br>8:00 - 8:50</th>
-                <th>2<br>8:50 - 9:40</th>
-                <th>3<br>10:00 - 10:50</th>
-                <th>4<br>10:50 - 11:40</th>
-                <th>5<br>1:00 - 1:50</th>
-                <th>6<br>1:50 - 2:40</th>
-                <th>7<br>2:40 - 3:30</th>
-            </tr>
-
-            <!-- MONDAY -->
-            <tr>
-                <td class="day">MON</td>
-                <td class="subject">PYTHON</td>
-                <td class="subject">DL&CO</td>
-                <td class="subject">OOPS</td>
-                <td class="subject">DM&GT</td>
-                <td colspan="3" class="lab">
-                    OOPS LAB / PYTHON
-                </td>
-            </tr>
-
-            <!-- TUESDAY -->
-            <tr>
-                <td class="day">TUE</td>
-                <td class="subject">DL&CO</td>
-                <td class="subject">DM&GT</td>
-                <td class="subject">PYTHON</td>
-                <td class="subject">UHV</td>
-                <td class="subject">ADSA</td>
-                <td class="subject">OOPS</td>
-                <td>LIB</td>
-            </tr>
-
-            <!-- WEDNESDAY -->
-            <tr>
-                <td class="day">WED</td>
-                <td class="subject">DM&GT</td>
-                <td class="subject">UHV</td>
-                <td class="subject">OOPS</td>
-                <td class="subject">ADSA</td>
-                <td>ES</td>
-                <td class="subject">PYTHON</td>
-                <td class="subject">DL&CO</td>
-            </tr>
-
-            <!-- THURSDAY -->
-            <tr>
-                <td class="day">THU</td>
-                <td class="subject">ADSA</td>
-                <td colspan="3" class="lab">
-                    ADS LAB / OOPS LAB
-                </td>
-                <td class="subject">PYTHON</td>
-                <td class="subject">DL&CO</td>
-                <td class="subject">UHV</td>
-            </tr>
-
-            <!-- FRIDAY -->
-            <tr>
-                <td class="day">FRI</td>
-                <td class="subject">OOPS</td>
-                <td class="subject">ADSA</td>
-                <td>ES</td>
-                <td class="subject">DL&CO</td>
-                <td class="subject">UHV</td>
-                <td class="subject">DM&GT</td>
-                <td class="subject">PYTHON</td>
-            </tr>
-
-            <!-- SATURDAY -->
-            <tr>
-                <td class="day">SAT</td>
-                <td colspan="3" class="lab">
-                    PYTHON / ADS LAB
-                </td>
-                <td>COUN</td>
-                <td class="subject">OOPS</td>
-                <td class="subject">DM&GT</td>
-                <td class="subject">ADSA</td>
-            </tr>
-
-        </table>
-
-    </div>
-
-    <div class="note">
-        <h3>⏰ Lunch Break</h3>
-        <p>
-            <b>11:40 AM - 1:00 PM</b>
-        </p>
-
-        <h3 style="margin-top:15px;">📖 Subject Details</h3>
+        <h1>📅 CampusKit Timetable</h1>
 
         <p>
-            <b>DM&GT</b> – Discrete Mathematics & Graph Theory<br>
-            <b>UHV</b> – Universal Human Values<br>
-            <b>DL&CO</b> – Digital Logic & Computer Organization<br>
-            <b>ADSA</b> – Advanced Data Structures & Algorithms<br>
-            <b>OOPS</b> – Object Oriented Programming Through Java<br>
-            <b>PYTHON</b> – Python Programming<br>
-            <b>ES</b> – Environmental Science
+            Create your own weekly timetable according to your college schedule.
         </p>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
     </div>
 
-    <footer>
-        Made with ❤️ for students | CampusKit 🎓
-    </footer>
+
+    <!-- SETUP SECTION -->
+
+    <div class="card" id="setupCard">
+
+        <h2>⚙️ Create Your Timetable</h2>
+
+        <div class="form-row">
+
+            <div class="form-group">
+
+                <label for="workingDays">
+                    Number of Working Days
+                </label>
+
+                <select id="workingDays">
+
+                    <option value="">
+                        Select working days
+                    </option>
+
+                    <option value="1">1 Day</option>
+                    <option value="2">2 Days</option>
+                    <option value="3">3 Days</option>
+                    <option value="4">4 Days</option>
+                    <option value="5">5 Days</option>
+                    <option value="6">6 Days</option>
+                    <option value="7">7 Days</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="periodCount">
+                    Number of Periods Per Day
+                </label>
+
+                <select id="periodCount">
+
+                    <option value="">
+                        Select number of periods
+                    </option>
+
+                    <option value="1">1 Period</option>
+                    <option value="2">2 Periods</option>
+                    <option value="3">3 Periods</option>
+                    <option value="4">4 Periods</option>
+                    <option value="5">5 Periods</option>
+                    <option value="6">6 Periods</option>
+                    <option value="7">7 Periods</option>
+                    <option value="8">8 Periods</option>
+                    <option value="9">9 Periods</option>
+                    <option value="10">10 Periods</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- DAY NAMES -->
+
+        <div id="daySection" class="day-box hidden">
+
+            <h3>📆 Enter Your Working Days</h3>
+
+            <div id="dayInputs"></div>
+
+        </div>
+
+
+        <!-- PERIOD TIMES -->
+
+        <div id="periodSection" class="period-box hidden">
+
+            <h3>⏰ Enter Time for Each Period</h3>
+
+            <div id="periodInputs"></div>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            id="generateBtn"
+            onclick="generateTimetable()"
+        >
+            ✨ Generate Timetable
+        </button>
+
+    </div>
+
+
+    <!-- TIMETABLE SECTION -->
+
+    <div class="card hidden" id="timetableCard">
+
+        <h2>📚 My Weekly Timetable</h2>
+
+        <p style="color:#666; margin-bottom:15px;">
+            Enter the subjects in the boxes below.
+            You can save and edit your timetable anytime.
+        </p>
+
+
+        <div class="table-container">
+
+            <table id="timetableTable">
+
+                <thead id="tableHead"></thead>
+
+                <tbody id="tableBody"></tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="primary-btn"
+                style="flex:1; min-width:200px;"
+                onclick="saveTimetable()"
+            >
+                💾 Save Timetable
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="editTimetable()"
+            >
+                ✏️ Edit / Change Setup
+            </button>
+
+            <button
+                class="danger-btn"
+                onclick="clearTimetable()"
+            >
+                🗑️ Clear Timetable
+            </button>
+
+        </div>
+
+
+        <div
+            class="success-message"
+            id="successMessage"
+        >
+            ✅ Timetable saved successfully!
+
+        </div>
+
+    </div>
 
 </div>
+
+
+<script>
+
+    /* ================================
+       DEFAULT DAY NAMES
+    ================================= */
+
+    const defaultDays = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ];
+
+
+    /* ================================
+       ELEMENTS
+    ================================= */
+
+    const workingDays =
+        document.getElementById("workingDays");
+
+    const periodCount =
+        document.getElementById("periodCount");
+
+    const daySection =
+        document.getElementById("daySection");
+
+    const periodSection =
+        document.getElementById("periodSection");
+
+    const dayInputs =
+        document.getElementById("dayInputs");
+
+    const periodInputs =
+        document.getElementById("periodInputs");
+
+    const timetableCard =
+        document.getElementById("timetableCard");
+
+
+    /* ================================
+       STORAGE KEY
+    ================================= */
+
+    const rollNumber =
+        localStorage.getItem("campuskitRollNumber") || "defaultUser";
+
+    const storageKey =
+        "campuskitTimetable_" + rollNumber;
+
+
+    /* ================================
+       CREATE DAY INPUTS
+    ================================= */
+
+    workingDays.addEventListener("change", function () {
+
+        const count =
+            parseInt(this.value);
+
+        dayInputs.innerHTML = "";
+
+        if (!count) {
+
+            daySection.classList.add("hidden");
+
+            return;
+        }
+
+        daySection.classList.remove("hidden");
+
+
+        for (let i = 0; i < count; i++) {
+
+            const row =
+                document.createElement("div");
+
+            row.className = "day-row";
+
+            row.innerHTML = `
+
+                <strong>Day ${i + 1}</strong>
+
+                <input
+                    type="text"
+                    class="day-name"
+                    value="${defaultDays[i]}"
+                    placeholder="Enter day name"
+                >
+
+            `;
+
+            dayInputs.appendChild(row);
+        }
+
+    });
+
+
+    /* ================================
+       CREATE PERIOD INPUTS
+    ================================= */
+
+    periodCount.addEventListener("change", function () {
+
+        const count =
+            parseInt(this.value);
+
+        periodInputs.innerHTML = "";
+
+        if (!count) {
+
+            periodSection.classList.add("hidden");
+
+            return;
+        }
+
+        periodSection.classList.remove("hidden");
+
+
+        for (let i = 0; i < count; i++) {
+
+            const row =
+                document.createElement("div");
+
+            row.className = "period-row";
+
+            row.innerHTML = `
+
+                <div class="period-number">
+                    Period ${i + 1}
+                </div>
+
+                <div>
+
+                    <label style="font-size:12px;">
+                        Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        class="start-time"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label style="font-size:12px;">
+                        End Time
+                    </label>
+
+                    <input
+                        type="time"
+                        class="end-time"
+                    >
+
+                </div>
+
+            `;
+
+            periodInputs.appendChild(row);
+        }
+
+    });
+
+
+    /* ================================
+       GENERATE TIMETABLE
+    ================================= */
+
+    function generateTimetable() {
+
+        const days =
+            parseInt(workingDays.value);
+
+        const periods =
+            parseInt(periodCount.value);
+
+
+        if (!days) {
+
+            alert("Please select the number of working days.");
+
+            return;
+        }
+
+
+        if (!periods) {
+
+            alert("Please select the number of periods per day.");
+
+            return;
+        }
+
+
+        /* GET DAY NAMES */
+
+        const dayNameElements =
+            document.querySelectorAll(".day-name");
+
+        const selectedDays = [];
+
+
+        dayNameElements.forEach(function (input) {
+
+            const name =
+                input.value.trim();
+
+            if (!name) {
+
+                selectedDays.push("Day");
+
+            } else {
+
+                selectedDays.push(name);
+
+            }
+
+        });
+
+
+        /* GET PERIOD TIMES */
+
+        const startTimes =
+            document.querySelectorAll(".start-time");
+
+        const endTimes =
+            document.querySelectorAll(".end-time");
+
+        const selectedPeriods = [];
+
+
+        for (let i = 0; i < periods; i++) {
+
+            const start =
+                startTimes[i].value;
+
+            const end =
+                endTimes[i].value;
+
+
+            if (!start || !end) {
+
+                alert(
+                    "Please enter the start and end time for every period."
+                );
+
+                return;
+            }
+
+
+            selectedPeriods.push({
+
+                start: start,
+
+                end: end
+
+            });
+
+        }
+
+
+        /* BUILD TABLE HEADER */
+
+        const tableHead =
+            document.getElementById("tableHead");
+
+        tableHead.innerHTML = "";
+
+
+        const headerRow =
+            document.createElement("tr");
+
+
+        const dayHeader =
+            document.createElement("th");
+
+        dayHeader.textContent =
+            "Day";
+
+        headerRow.appendChild(dayHeader);
+
+
+        selectedPeriods.forEach(function (period, index) {
+
+            const th =
+                document.createElement("th");
+
+            th.innerHTML = `
+                Period ${index + 1}
+                <div class="time-heading">
+                    ${formatTime(period.start)}
+                    -
+                    ${formatTime(period.end)}
+                </div>
+            `;
+
+            headerRow.appendChild(th);
+
+        });
+
+
+        tableHead.appendChild(headerRow);
+
+
+        /* BUILD TABLE BODY */
+
+        const tableBody =
+            document.getElementById("tableBody");
+
+        tableBody.innerHTML = "";
+
+
+        selectedDays.forEach(function (day, dayIndex) {
+
+            const row =
+                document.createElement("tr");
+
+
+            const dayCell =
+                document.createElement("td");
+
+            dayCell.className =
+                "day-cell";
+
+            dayCell.textContent =
+                day;
+
+            row.appendChild(dayCell);
+
+
+            selectedPeriods.forEach(function () {
+
+                const cell =
+                    document.createElement("td");
+
+
+                const input =
+                    document.createElement("input");
+
+                input.type = "text";
+
+                input.className =
+                    "subject-input";
+
+                input.placeholder =
+                    "Subject";
+
+
+                input.dataset.day =
+                    dayIndex;
+
+                input.dataset.period =
+                    selectedPeriods.indexOf(
+                        selectedPeriods.find(
+                            p => p === arguments[0]
+                        )
+                    );
+
+
+                cell.appendChild(input);
+
+                row.appendChild(cell);
+
+            });
+
+
+            tableBody.appendChild(row);
+
+        });
+
+
+        /* SHOW TABLE */
+
+        timetableCard.classList.remove("hidden");
+
+        timetableCard.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* ================================
+       FORMAT TIME
+    ================================= */
+
+    function formatTime(time) {
+
+        if (!time) {
+            return "";
+        }
+
+
+        const parts =
+            time.split(":");
+
+        let hour =
+            parseInt(parts[0]);
+
+        const minute =
+            parts[1];
+
+        const ampm =
+            hour >= 12 ? "PM" : "AM";
+
+        hour =
+            hour % 12 || 12;
+
+
+        return hour + ":" + minute + " " + ampm;
+
+    }
+
+
+    /* ================================
+       SAVE TIMETABLE
+    ================================= */
+
+    function saveTimetable() {
+
+        const table =
+            document.getElementById("timetableTable");
+
+        const rows =
+            table.querySelectorAll("tbody tr");
+
+
+        if (rows.length === 0) {
+
+            alert("Please generate your timetable first.");
+
+            return;
+        }
+
+
+        const timetableData = {
+
+            workingDays:
+                workingDays.value,
+
+            periodCount:
+                periodCount.value,
+
+            days: [],
+
+            periods: [],
+
+            subjects: []
+
+        };
+
+
+        /* SAVE DAYS */
+
+        document
+            .querySelectorAll(".day-name")
+            .forEach(function (input) {
+
+                timetableData.days.push(
+                    input.value.trim()
+                );
+
+            });
+
+
+        /* SAVE PERIOD TIMES */
+
+        document
+            .querySelectorAll(".start-time")
+            .forEach(function (input, index) {
+
+                const endInput =
+                    document.querySelectorAll(".end-time")[index];
+
+                timetableData.periods.push({
+
+                    start: input.value,
+
+                    end: endInput.value
+
+                });
+
+            });
+
+
+        /* SAVE SUBJECTS */
+
+        rows.forEach(function (row) {
+
+            const subjectInputs =
+                row.querySelectorAll(".subject-input");
+
+            const rowSubjects = [];
+
+
+            subjectInputs.forEach(function (input) {
+
+                rowSubjects.push(
+                    input.value.trim()
+                );
+
+            });
+
+
+            timetableData.subjects.push(
+                rowSubjects
+            );
+
+        });
+
+
+        localStorage.setItem(
+            storageKey,
+            JSON.stringify(timetableData)
+        );
+
+
+        const message =
+            document.getElementById("successMessage");
+
+        message.style.display =
+            "block";
+
+
+        setTimeout(function () {
+
+            message.style.display =
+                "none";
+
+        }, 3000);
+
+    }
+
+
+    /* ================================
+       EDIT / CHANGE SETUP
+    ================================= */
+
+    function editTimetable() {
+
+        timetableCard.classList.add("hidden");
+
+        document
+            .getElementById("setupCard")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* ================================
+       CLEAR TIMETABLE
+    ================================= */
+
+    function clearTimetable() {
+
+        const confirmClear =
+            confirm(
+                "Are you sure you want to delete your timetable?"
+            );
+
+
+        if (!confirmClear) {
+            return;
+        }
+
+
+        localStorage.removeItem(storageKey);
+
+        timetableCard.classList.add("hidden");
+
+        workingDays.value = "";
+
+        periodCount.value = "";
+
+        dayInputs.innerHTML = "";
+
+        periodInputs.innerHTML = "";
+
+        daySection.classList.add("hidden");
+
+        periodSection.classList.add("hidden");
+
+
+        alert("Timetable deleted successfully.");
+
+    }
+
+
+    /* ================================
+       LOAD SAVED TIMETABLE
+    ================================= */
+
+    function loadSavedTimetable() {
+
+        const saved =
+            localStorage.getItem(storageKey);
+
+
+        if (!saved) {
+            return;
+        }
+
+
+        try {
+
+            const data =
+                JSON.parse(saved);
+
+
+            workingDays.value =
+                data.workingDays;
+
+            periodCount.value =
+                data.periodCount;
+
+
+            /* TRIGGER DAY INPUTS */
+
+            workingDays.dispatchEvent(
+                new Event("change")
+            );
+
+
+            /* RESTORE DAY NAMES */
+
+            const dayNameElements =
+                document.querySelectorAll(".day-name");
+
+
+            data.days.forEach(function (day, index) {
+
+                if (dayNameElements[index]) {
+
+                    dayNameElements[index].value =
+                        day;
+
+                }
+
+            });
+
+
+            /* TRIGGER PERIOD INPUTS */
+
+            periodCount.dispatchEvent(
+                new Event("change")
+            );
+
+
+            /* RESTORE TIMES */
+
+            const startTimes =
+                document.querySelectorAll(".start-time");
+
+            const endTimes =
+                document.querySelectorAll(".end-time");
+
+
+            data.periods.forEach(function (period, index) {
+
+                if (startTimes[index]) {
+
+                    startTimes[index].value =
+                        period.start;
+
+                }
+
+                if (endTimes[index]) {
+
+                    endTimes[index].value =
+                        period.end;
+
+                }
+
+            });
+
+
+            /* GENERATE TABLE */
+
+            generateTimetable();
+
+
+            /* RESTORE SUBJECTS */
+
+            const rows =
+                document.querySelectorAll(
+                    "#tableBody tr"
+                );
+
+
+            data.subjects.forEach(
+                function (rowSubjects, rowIndex) {
+
+                    if (!rows[rowIndex]) {
+                        return;
+                    }
+
+
+                    const inputs =
+                        rows[rowIndex]
+                            .querySelectorAll(
+                                ".subject-input"
+                            );
+
+
+                    rowSubjects.forEach(
+                        function (subject, colIndex) {
+
+                            if (inputs[colIndex]) {
+
+                                inputs[colIndex].value =
+                                    subject;
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.log(
+                "Could not load saved timetable.",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* ================================
+       LOAD WHEN PAGE OPENS
+    ================================= */
+
+    window.addEventListener(
+        "load",
+        loadSavedTimetable
+    );
+
+</script>
 
 </body>
 </html>
